@@ -22,3 +22,36 @@ function speak(){
     utterThis=new SpeechSynthesisUtterance(speak_data);
     synth.speak(utterThis);
 }
+function check(){
+    img=document.getElementById("image");
+    classifier.classify(img,gotresults)
+}
+function gotresults(error,result){
+    if(error){
+        console.log(error);
+    }
+    else{
+        console.log(result);
+        document.getElementById("hand_name").innerHTML=result[0].label;
+        prediction=result[0].label;
+        speak()
+        if (result[0].label=="Victory"){
+            document.getElementById("emoji_picture").innerHTML="&#9996;";
+        }
+        if (result[0].label=="Amazing"){
+            document.getElementById("emoji_picture").innerHTML="&#128076;";
+        }
+        if (result[0].label=="Best of Luck"){
+            document.getElementById("emoji_picture").innerHTML="&#128077;";
+        }
+        if (result[0].label=="Hit"){
+            document.getElementById("emoji_picture").innerHTML="&#9994;";
+        }
+        if (result[0].label=="Clap"){
+            document.getElementById("emoji_picture").innerHTML="&#128079;";
+        }
+        if (result[0].label=="Yo"){
+            document.getElementById("emoji_picture").innerHTML="&#129304;";
+        }
+    }
+}
